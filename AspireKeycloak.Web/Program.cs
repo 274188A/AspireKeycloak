@@ -41,7 +41,7 @@ builder.Services.AddAuthentication(options =>
     options.ClientId = "WeatherWeb";
     options.ResponseType = OpenIdConnectResponseType.Code;
     options.Scope.Add("weather:all");
-    options.RequireHttpsMetadata = false;
+    options.RequireHttpsMetadata = builder.Environment.IsProduction();
     options.TokenValidationParameters.NameClaimType = JwtRegisteredClaimNames.Name;
     options.SaveTokens = true;
     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme; // Ensure cookies are used for sign-in

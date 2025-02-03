@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Headers;
+using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Authentication;
 
 namespace AspireKeycloak.Web;
@@ -10,13 +10,13 @@ public class AuthorizationHandler(IHttpContextAccessor httpContextAccessor) : De
         var httpContext = httpContextAccessor.HttpContext ??
             throw new InvalidOperationException("No HttpContext available from the IHttpContextAccessor!");
 
-        var accessToken = await httpContext.GetTokenAsync("access_token");
+        var accessToken = await httpContext.GetTokenAsync("access_token").ConfigureAwait(false);
 
         if (!string.IsNullOrEmpty(accessToken))
         {
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
-        return await base.SendAsync(request, cancellationToken);
+        return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
     }
 }

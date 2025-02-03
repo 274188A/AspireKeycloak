@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
+const string ForcasterPolicy = "Forcaster";
+const string ForcasterRole = "forcaster";
+
 // Add service defaults & Aspire components.
 builder.AddServiceDefaults();
 
@@ -22,7 +25,7 @@ builder.Services.AddTransient<IClaimsTransformation, RoleClaimsTransformation>()
 
 // Add authorization builder and define a role-based policy
 builder.Services.AddAuthorizationBuilder()
-    .AddPolicy("forcaster", policy => policy.RequireRole("forcaster")); // Define the "Forcaster" policy
+    .AddPolicy(ForcasterPolicy, policy => policy.RequireRole(ForcasterRole));
 
 var app = builder.Build();
 
@@ -49,7 +52,7 @@ app.MapGet("/weatherforecast", () =>
         .ToArray();
     return forecast;
 })
-.RequireAuthorization("forcaster");
+.RequireAuthorization(ForcasterPolicy);
 
 app.MapDefaultEndpoints();
 
