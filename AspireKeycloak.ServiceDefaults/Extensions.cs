@@ -1,6 +1,5 @@
 using System.Security.Claims;
 using System.Text.Json;
-using AspireKeycloak.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;

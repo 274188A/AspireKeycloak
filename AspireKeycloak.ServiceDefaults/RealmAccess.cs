@@ -1,3 +1,7 @@
-namespace AspireKeycloak.Web;
+namespace AspireKeycloak.ServiceDefaults;
 
-public class RealmAccess { public List<string>? Roles { get; set; } } // one user can be assigned multiple roles
+public class RealmAccess
+{
+    public List<string>? Roles { get; set; }
+}
+
